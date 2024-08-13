@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel RAG Chatbot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Custom font */
+            background-color: #f7f8fa; /* Minimal pastel white background */
+            color: #121212; /* Dark text color for light mode */
+        }
+        #chat-container {
+            animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+            position: relative; /* For positioning the button */
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        /* Example typing indicator style */
+        #typing-indicator {
+            display: none;
+            margin-bottom: 10px;
+        }
+        #typing-indicator span {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            background-color: #007bff;
+            border-radius: 50%;
+            margin-right: 4px;
+            animation: typing 1s infinite ease-in-out;
+        }
+        @keyframes typing {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .badge-primary {
+            background-color: #007bff; /* Keeping the same color for consistency */
+        }
+        .badge-secondary {
+            background-color: #f5f5f5; /* Light background for consistency */
+        }
+        .bg-light {
+            background-color: #f0f0f0; /* Light background for messages */
+            color: #000000; /* Dark text color for messages */
+        }
+        .input-group .form-control {
+            background-color: #f7f8fa; /* Pastel white background for input */
+            color: #121212; /* Dark text color for input */
+            border: 1px solid #cccccc; /* Border color for input */
+        }
+        .input-group .form-control:focus {
+            border-color: #1877f2; /* Facebook blue for input focus */
+            box-shadow: 0 0 0 0.2rem rgba(24, 119, 242, 0.25); /* Facebook blue shadow */
+        }
+        .input-group .btn-primary {
+            background-color: #1877f2; /* Facebook blue for the send button */
+            border: 1px solid #1877f2; /* Border color for button */
+            color: #ffffff; /* White text color for button */
+        }
+        .input-group .btn-primary:hover {
+            background-color: #145dbf; /* Darker Facebook blue on hover */
+            border-color: #145dbf;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Travel RAG Chatbot For London</h1>
+        <div id="chat-container">
+            <div id="chat-history" class="mb-3"></div>
+            <form id="chat-form">
+                <div class="input-group">
+                    <input type="text" id="user-input" class="form-control" placeholder="Ask London related travel queries" required>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#chat-form").submit(function (event) {
+                event.preventDefault();
+                let userInput = $("#user-input").val().trim();
+                if (userInput !== "") {
+                    $("#chat-history").append(`
+                        <div class="text-right mb-2">
+                            <div class="badge badge-primary p-2">You</div>
+                            <div class="bg-light rounded p-2">${userInput}</div>
+                        </div>
+                    `);
+                    $("#user-input").val("");
+
+                    $.ajax({
+                        url: "/chat",
+                        type: "POST",
+                        data: { user_input: userInput },
+                        success: function (response) {
+                            $("#chat-history").append(`
+                                <div class="text-left mb-2">
+                                    <div class="badge badge-secondary p-2">AI</div>
+                                    <div class="bg-light rounded p-2">${response}</div>
+                                </div>
+                            `);
+                        },
+                        error: function () {
+                            alert("Error processing your request.");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
