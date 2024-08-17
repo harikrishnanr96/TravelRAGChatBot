@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choose LLM</title>
+    <title>London Travel & Insights Chatbot</title> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -40,12 +40,15 @@
             color: #121212; 
         }
         .main-heading {
-            font-size: 1.5rem;
+            font-size: 2.5rem; /* Increased size further */
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 30px; /* Increased margin for more breathing room */
         }
         h1 {
-            font-size: 1.75rem;
+            font-size: 1.5rem; 
+        }
+        h2 {
+            font-size: 1.1rem; /* Further reduced size for sample queries heading */
         }
         footer {
             margin-top: 30px;
@@ -60,6 +63,7 @@
 <body>
     <div class="container">
         <div class="main-heading">👋 Hi! This is a Travel Chatbot for London 🇬🇧</div> 
+
         <h1 class="text-center mb-4">Choose Language Model</h1>
         <form method="POST" action="{{ url_for('index') }}">
             <div class="form-group">
@@ -67,35 +71,51 @@
                 <select class="form-control" id="llm_choice" name="llm_choice">
                     <option value="Llama-2-7B">Llama-2-7B</option>
                     <option value="Mistral">Mistral</option>
-                    <option value="Chatgpt-3.5">falcon-7b</option>
+                    <option value="gpt-3.5">gpt-3.5</option>
                 </select>
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Proceed</button>
             </div>
         </form>
-    </div>
-    <footer>
-        <p>
-            <footer>
+
+        <h2 class="text-center mt-5 mb-3">Sample Queries</h2>
+        <ul>
+            <li>What is the location of the Whitechapel station on the Elizabeth line?</li>
+            <li>What are some options for high-end fine dining in London?</li>
+            <li>Provide me a 5-day itinerary for travel to London.</li>
+            <li>Where can one find cheap eats in London?</li>
+            <li>What factors affect the accuracy of tram passenger kilometre estimates?</li>
+            <li>What was the % increase in the Asian population of London from 2011 to 2021?</li>
+            <li>What is the change in private vehicle volumes from 2015 to 2023?</li>
+        </ul>
+
+        <footer>
                 <p>
                     <strong>Disclaimer:</strong><br>
                     * This chatbot is designed for research purposes and to provide information related to travel in London, including statistical insights and trends. <br>
                     * It utilizes data from sources such as Wikivoyage and reports on travel in London.<br><br>
-            
+                    
                     <strong>Limitations:</strong><br>
                     * The chatbot may not always provide accurate or complete information. <br>
                     * If you encounter any harmful or offensive content, please stop the conversation immediately. <br>
                     * The chatbot does not store any personal data.<br>
                     * While the chatbot aims to be helpful for various users, its information might be more geared towards those interested in statistical trends and insights, in addition to general travel information.<br><br>
-            
+                    
                     <strong>Use at Your Own Risk:</strong><br>
                     * The information provided by this chatbot is for general informational purposes only and should not be considered a substitute for professional advice or official travel guidance.
                 </p>
             </footer>
-            
 
-        </p>
-    </footer>
+        <div class="mt-4"> 
+            <p><strong>Data Sources:</strong></p>
+            <ul>
+                <li>Wikivoyage</li>
+                <li>Reports by Transport for London 2023</li>
+            </ul>
+        </div>
+
+    </div>
 </body>
 </html>
+
