@@ -10,3 +10,6 @@ chainlit
 huggingface_hub
 flask
 langchain_community
+langchain_openai
+load_dotenv
+unstructured
