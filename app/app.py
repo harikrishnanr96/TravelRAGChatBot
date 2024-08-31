@@ -99,7 +99,7 @@ class RetrievalChain:
             chain_type='stuff',
             retriever=self.retriever,
             return_source_documents=True,
-            chain_type_kwargs={'prompt': self.prompt_template}  # Pass the PromptTemplate object directly
+            chain_type_kwargs={'prompt': self.prompt_template}  
         )
     
     def get_answer(self, query):
